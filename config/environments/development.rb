@@ -75,6 +75,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   
   config.active_job.queue_adapter = :inline
-  config.hosts << "ae1f640d65414863b31516eb898a97e2.vfs.cloud9.ap-northeast-1.amazonaws.com"
+  config.hosts.clear
   gem 'devise'
 end

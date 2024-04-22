@@ -1,6 +1,7 @@
 @use '~bootstrap/scss/bootstrap';
 
-import "jquery";
-import "popper.js";
-import "bootstrap";
-import "../stylesheets/application"; 
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}

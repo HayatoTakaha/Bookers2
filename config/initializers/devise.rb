@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '7b7bc89907a84c759faae555ea8c0e468ab9c23856e2b42d2943dde2608854aa90852fd6e4c2be5c185db4a3800b931305ef5b40e7b0fb7e1436b5a7479c9694'
+  # config.secret_key = '7fa93a782584726177113ccd481771535eb54383e87af23c0adf4eedaff1d281573d6e01431f834e824a917c3fb55760c98ad5e53069fb02590f9792b97e87aa'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -46,7 +46,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [:email]
+  config.authentication_keys = [:name]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'b3113ce2ad81a9bbc4daa3f16d07be4355a72a9a34d11dae8ef06e49a8da735c915476ce6f9be4eb1f046995539c62ebd5f63704d8ad6dba89474ea4d851fe3a'
+  # config.pepper = 'ef58cc8132dc6dd9fa3c982dddb6968a1f6e1d5217fa8fc59b13f52c8048e81fff45e3752d3114cd24d0a945bfd0dbf049ce97125f16b8a7cbc790cc0c5df069'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -310,5 +310,4 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-config.authentication_keys = [:name]
 end
