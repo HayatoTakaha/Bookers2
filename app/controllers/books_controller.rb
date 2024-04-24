@@ -20,10 +20,12 @@ end
 
   def show
     @book = Book.find(params[:id])
+    @user = @book.user
   end
 
   def edit
      @book = Book.find(params[:id])
+     @user = @book.user
   end
 
 def update
@@ -41,7 +43,7 @@ def destroy
  @book = Book.find(params[:id])
  @book.destroy
  flash[:notice] = "Book was successfully destroyed."
-    redirect_to books_path
+    redirect_to books_path(@book.id)
 end
   private
 
