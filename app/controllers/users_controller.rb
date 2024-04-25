@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
    before_action :is_matching_login_user, only: [:edit, :update]
+
   def show
     @user = User.find(params[:id])
     @book = Book.new
@@ -8,26 +9,32 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+
   end
-  
+
   def update
     @user = User.find(params[:id])
-    @user.update
-    redirect_to user_path
+    if @user.update(user_params)
+    flash[:notice] = "You have updated user successfully."
+    redirect_to user_path(@user.id)
+    else
+    flash.now[:alert] = "Update failed."
+    render :edit
+    end
   end
-  
+
   def index
     @users = User.all
     @book = Book.new
   end
-  
+
   def destroy
- @user = User.find(params[:id])
- @books.destroy
- flash[:notice] = "Book was successfully destroyed."
+   @user = User.find(params[:id])
+   @user.destroy
+   flash[:notice] = "Book was successfully destroyed."
     redirect_to books_path
   end
-    
+
   private
 
   def is_matching_login_user
@@ -38,6 +45,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :profile_image)
+    params.require(:user).permit(:name, :profile_image, :introduction)
   end
 end

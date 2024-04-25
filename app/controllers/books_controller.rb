@@ -5,7 +5,7 @@ def create
      @book.user_id = current_user.id
     if @book.save
       flash[:notice] = "You have created book successfully."
-      redirect_to book_path(@book.id)
+      redirect_to books_path(@book.id)
     else
        @user_books = Book.all
       flash.now[:alert] = "Posting failed."
@@ -43,7 +43,7 @@ def destroy
  @book = Book.find(params[:id])
  @book.destroy
  flash[:notice] = "Book was successfully destroyed."
-    redirect_to books_path(@book.id)
+    redirect_to books_path
 end
   private
 
