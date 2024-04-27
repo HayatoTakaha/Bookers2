@@ -1,15 +1,16 @@
 class UsersController < ApplicationController
-   before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :authenticate_user!, except: [:top]
 
   def show
     @user = User.find(params[:id])
     @book = Book.new
     @books = @user.books
+    @users = User.find(params[:id])
   end
 
   def edit
     @user = User.find(params[:id])
-
+    
   end
 
   def update
@@ -26,23 +27,18 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @book = Book.new
+    @user = current_user
+    @user_new = User.new
   end
 
   def destroy
    @user = User.find(params[:id])
-   @user.destroy
+   @user.destroy(user.params)
    flash[:notice] = "Book was successfully destroyed."
     redirect_to books_path
   end
 
   private
-
-  def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id
-    redirect_to book_path
-    end
-  end
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)

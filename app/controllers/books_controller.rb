@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+before_action :authenticate_user!, except: [:top]
 
 def create
      @book = Book.new(book_params)
@@ -10,6 +11,7 @@ def create
       @books = Book.all
        @users = User.all
        @user_books = Book.all
+       @user = current_user
       flash.now[:alert] = "Posting failed."
       render :index
     end
@@ -19,10 +21,13 @@ end
     @books = Book.all
     @book = Book.new
     @users = User.all
+    @user = current_user
   end
 
   def show
+    @books = Book.find(params[:id])
     @book = Book.find(params[:id])
+    @book_new = Book.new
     @user = @book.user
     @users = User.all
   end
