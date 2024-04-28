@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-before_action :authenticate_user!, except: [:top]
+before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
 def create
      @book = Book.new(book_params)
@@ -55,7 +55,14 @@ def destroy
     redirect_to books_path
 end
   private
-
+  
+  def is_matching_login_user
+    book = Book.find(params[:id])
+    unless book.user_id == current_user.id
+    redirect_to books_path
+    end
+  end
+  
   def book_params
     params.require(:book).permit(:title, :body)
   end

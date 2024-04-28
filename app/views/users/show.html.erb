@@ -5,28 +5,7 @@
       <div class='col-md-3'>
         <h2>User info</h2>
 
-        <table class='table'>
-          <tr>
-          <% if @user && @user.image_url %>
-            <th><%= image_tag @user.image_url %></th>
-          <% end %>
-          </tr>
-          <tr>
-            <th>name</th>
-            <th><%= @user.name %></th>  <!-- 固定値 -->
-          </tr>
-          <tr>
-            <th>introduction</th>
-            <th><%= @user.introduction %></th>  <!-- 固定値 -->
-          </tr>
-        </table>
-        <div class='row'>
-          <% if @user == current_user %>
-            <%= link_to edit_user_path(@user), class:"btn btn-outline-secondary btn-block" do %>
-            <i class="fas fa-user-cog"></i>
-            <% end %>
-          <% end %>
-        </div>
+        <%= render 'info', user: @user %>
 
         <%= render 'list', book: @book %>
       </div>
@@ -46,7 +25,11 @@
           <tbody>
             <tr>
             <% @books.each do |book| %>
-            <td><%= image_tag book.user.get_profile_image(100,100) %></td>
+            <td>
+            <%= link_to (user_path(book.user.id)) do %>
+            <%= image_tag book.user.get_profile_image(100,100) %>
+            <% end %>
+            </td>
             <td><%= link_to book.title, book_path(book) %></td>
             <td><%= book.body %></td>
             </tr>
